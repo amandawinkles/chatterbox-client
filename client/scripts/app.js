@@ -20,10 +20,17 @@ var App = {
   fetch: function(callback = ()=>{}) {
     Parse.readAll((data) => {
       // examine the response from the server request:
-      console.log(data);
+      let arrayOfObj = data.results;
+      MessagesView.render(arrayOfObj);
 
       callback();
     });
+    // Parse.readAll((data) => {
+    //   // examine the response from the server request:
+    //   console.log(data);
+
+    //   callback();
+    // });
   },
 
   startSpinner: function() {
