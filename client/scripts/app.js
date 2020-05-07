@@ -22,7 +22,6 @@ var App = {
       // examine the response from the server request:
       let arrayOfObj = data.results;
       MessagesView.render(arrayOfObj);
-
       callback();
     });
     // Parse.readAll((data) => {

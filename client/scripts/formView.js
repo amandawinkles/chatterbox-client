@@ -9,7 +9,14 @@ var FormView = {
   handleSubmit: function(event) {
     // Stop the browser from submitting the form
     event.preventDefault();
-
+    if ($('#message').val()) {
+      var newMessage = {};
+      newMessage.username = App.username;
+      newMessage.roomname = 'Lobby';
+      newMessage.text = $('#message').val();
+      Parse.create(newMessage);
+      MessagesView.render(newMessage);
+    }
     console.log('click!');
   },
 
