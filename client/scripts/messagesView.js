@@ -10,16 +10,16 @@ var MessagesView = {
     // console.log('newMessage', data)
     //append $chats with messageView render function
     //loop through data.results = array of nested objects
-    for (let i = 0; i < data.length; i++) {
-      var objMessage = data[i];
+    _.each(data, function (userObj) {
+      var objMessage = userObj;
       Message = {};
       Message.username = objMessage.username;
       Message.text = objMessage.text;
       Message.roomname = objMessage.roomname;
       MessagesView.renderMessage(Message);
-    }
+    });
   },
-  renderMessage: function(message) {
+  renderMessage: function (message) {
     $('#chats').append(MessageView.render(message));
   }
 };

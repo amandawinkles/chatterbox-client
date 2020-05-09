@@ -2,25 +2,27 @@ var FormView = {
 
   $form: $('form'),
 
-  initialize: function() {
+  initialize: function () {
     FormView.$form.on('submit', FormView.handleSubmit);
   },
 
-  handleSubmit: function(event) {
+  handleSubmit: function (event) {
     // Stop the browser from submitting the form
     event.preventDefault();
     if ($('#message').val()) {
       var newMessage = {};
       newMessage.username = App.username;
-      newMessage.roomname = 'Lobby';
-      newMessage.text = $('#message').val();
+      newMessage.roomname = $('#select option:selected').text();
+      newMessage.text = document.getElementById('message').value;
       Parse.create(newMessage);
-      MessagesView.render(newMessage);
+      // puts the prepending element at the first index.
+      $('#chats').prepend(MessageView.render(newMessage));
+      document.getElementById('send').reset();
     }
     console.log('click!');
   },
 
-  setStatus: function(active) {
+  setStatus: function (active) {
     var status = active ? 'true' : null;
     FormView.$form.find('input[type=submit]').attr('disabled', status);
   },
