@@ -4,6 +4,7 @@ var App = {
 
   username: 'anonymous',
   roomname: 'undefined',
+
   initialize: function() {
     App.username = window.location.search.substr(10);
 
@@ -23,8 +24,17 @@ var App = {
       let arrayOfObj = data.results;
       MessagesView.render(arrayOfObj);
       RoomsView.render(arrayOfObj);
+      Rooms.addRoom(arrayOfObj);
       callback();
     });
+    // setTimeout(() => {
+    //   App.clearMessages();
+    //   App.fetch();
+    // }, 10000);
+  },
+
+  clearMessages: function() {
+    $('#chats').html('');
   },
 
   startSpinner: function() {

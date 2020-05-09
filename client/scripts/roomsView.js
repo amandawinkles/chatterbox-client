@@ -4,32 +4,27 @@ var RoomsView = {
   $select: $('#rooms select'),
 
   initialize: function () {
-    RoomsView.$button.on('click', RoomsView.handleSubmitRoom);
+    Rooms.addRoom();
+    Rooms.update();
+    // RoomsView.$button.on('click', RoomsView.handleSubmitRoom);
   },
-  /* ----- add new room to chat ---- */
-  handleSubmitRoom: function (event) {
-    // Stop the browser from submitting the form
-    event.preventDefault();
-    if ($('#message').val()) {
-      var newRoom = {};
-      newRoom.roomname = document.getElementById('message').value,
-      Parse.create(newRoom);
-      // puts the prepending element at the first index.
-      $('#rooms select').prepend(RoomsView.render(newRoom));
-      document.getElementById('select').reset();
-    }
-    console.log('click!');
-  },
+  // /* ----- add new room to chat ---- */
+  // handleSubmitRoom: function (event) {
+  //   // Stop the browser from submitting the form
+  //   // event.preventDefault();
+  //   if ($('#roomText').val()) {
+  //     var newRoom = {};
+  //     newRoom.roomname = document.getElementById('roomText').value,
+  //     // Parse.create(newRoom);
+  //     // puts the prepending element at the first index.
+  //     $('#rooms select').prepend(RoomsView.renderRoom(newRoom));
+  //     // document.getElementById('select').reset();
+  //   }
+  //   console.log('click!');
+  // },
 
-  render: function (data) {
+  render: function (listOfRooms) {
     //append #rooms select with RoomView render function
-    var listOfRooms = new Set(); // Set object stores unique values of any type, whether primitive values or object references.
-    // console.log('rooms', listOfRooms)
-    //loop through data.results = array of nested objects
-    _.each(data, function (obj) {
-      // push each roomname to {}, no duplicates
-      listOfRooms.add(obj.roomname);
-    });
     // iterate over list of rooms
     for (var room of listOfRooms) {
       // console.log('room', typeof room);
@@ -48,6 +43,7 @@ var RoomsView = {
   },
 
   renderRoom: function (room) {
-    $('#rooms select').append(RoomView.render(room));
+    roomname = room.roomname;
+    $('#rooms select').prepend(RoomView.render(roomname));
   }
 };
