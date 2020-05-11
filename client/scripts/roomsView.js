@@ -4,46 +4,45 @@ var RoomsView = {
   $select: $('#rooms select'),
 
   initialize: function () {
-    Rooms.addRoom();
-    Rooms.update();
-    // RoomsView.$button.on('click', RoomsView.handleSubmitRoom);
+    Rooms.add();
+
   },
-  // /* ----- add new room to chat ---- */
-  // handleSubmitRoom: function (event) {
-  //   // Stop the browser from submitting the form
-  //   // event.preventDefault();
-  //   if ($('#roomText').val()) {
-  //     var newRoom = {};
-  //     newRoom.roomname = document.getElementById('roomText').value,
-  //     // Parse.create(newRoom);
-  //     // puts the prepending element at the first index.
-  //     $('#rooms select').prepend(RoomsView.renderRoom(newRoom));
-  //     // document.getElementById('select').reset();
+
+  render: function (arrayOfObj) {
+    // arrayOfObj = data.result [{}, {}, {}]
+    //append #rooms select with RoomView render function
+    var listOfRooms = [];
+    arrayOfObj.forEach(function (obj) {
+      if (obj.roomname && !listOfRooms.includes(RoomView.render({ roomname: obj.roomname }))) {
+        listOfRooms.push({ roomname: obj.roomname }); // list of individual objects [{roomname: "all"}, {roomname: "room1"}]
+      }
+    });
+    // iterate over list of rooms
+    for (var roomObj of listOfRooms) {
+      // passing each obj with an individual roomname property to the "renderRoom" function"
+      RoomsView.renderRoom(roomObj);
+    }
+    return listOfRooms;
+  },
+
+  // filterRooms: function (data) {
+  //   // let data = this.dataCollection;
+  //   // App.clearMessages();
+  //   for (let i = data.length - 1; i >= data.length - 101; i--) {
+  //     let roomList = data[i]; // {}
+  //     // console.log('roomList', roomList);
+  //     if (roomList.roomname === undefined || roomList.roomname === "") {
+  //       continue;
+  //     }
+  //     if (roomList.roomname === $('#select option:selected').text()) {
+  //       MessagesView.renderMessage(roomList);
+  //     }
   //   }
-  //   console.log('click!');
   // },
 
-  render: function (listOfRooms) {
-    //append #rooms select with RoomView render function
-    // iterate over list of rooms
-    for (var room of listOfRooms) {
-      // console.log('room', typeof room);
-      // if the roomname exists
-      if (room) {
-        // console.log('first log', room);
-        // declare var with empty obj
-        var roomObj = {};
-        // assign room value to obj
-        roomObj.roomname = room;
-        // console.log('second log', roomObj);
-        // passing each obj with an individual roomname property to the "renderRoom" function"
-        RoomsView.renderRoom(roomObj);
-      }
-    }
-  },
-
   renderRoom: function (room) {
+    // console.log(room);
     roomname = room.roomname;
-    $('#rooms select').prepend(RoomView.render(roomname));
+    $('#rooms select').append(RoomView.render(roomname));
   }
 };

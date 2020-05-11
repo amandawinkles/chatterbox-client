@@ -24,7 +24,7 @@ var App = {
       let arrayOfObj = data.results;
       MessagesView.render(arrayOfObj);
       RoomsView.render(arrayOfObj);
-      Rooms.addRoom(arrayOfObj);
+      // RoomsView.filterRooms(arrayOfObj);
       callback();
     });
     // setTimeout(() => {

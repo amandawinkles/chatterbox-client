@@ -12,7 +12,7 @@ var FormView = {
     if ($('#message').val()) {
       var newMessage = {};
       newMessage.username = App.username;
-      newMessage.roomname = $('#select option:selected').text();
+      newMessage.roomname = $('#select option:selected').text() || 'Lobby';
       newMessage.text = document.getElementById('message').value;
       Parse.create(newMessage);
       // puts the prepending element at the first index.
