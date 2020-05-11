@@ -20,6 +20,10 @@ var App = {
 
   fetch: function(callback = ()=>{}) {
     Parse.readAll((data) => {
+      /*
+      Rooms.update(data.results, RoomsView.render);
+      Messages.update(data.results, MessagesView.render);
+      */
       // examine the response from the server request:
       let arrayOfObj = data.results;
       MessagesView.render(arrayOfObj);
@@ -27,10 +31,10 @@ var App = {
       // RoomsView.filterRooms(arrayOfObj);
       callback();
     });
-    // setTimeout(() => {
-    //   App.clearMessages();
-    //   App.fetch();
-    // }, 10000);
+    setTimeout(() => {
+      App.clearMessages();
+      App.fetch();
+    }, 20000);
   },
 
   clearMessages: function() {

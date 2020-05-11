@@ -1,9 +1,15 @@
 var Friends = {
-  listOfFriends: new Set(),
+
+  listOfFriends: new Set,
 
   toggleStatus: function(username) {
     if (!Friends.listOfFriends.has(username)) {
       Friends.listOfFriends.add(username);
+      Friends.friendStatus = true;
+    }
+    else {
+      Friends.listOfFriends.delete(username);
+      Friends.friendStatus = false;
     }
   },
 
@@ -11,11 +17,6 @@ var Friends = {
     Friends.listOfFriends.has(username);
   }
 };
-$('.username').click(function(value) {
-  let name = ($(this).text());
-  //console.log
-  Friends.toggleStatus(name);
-});
 
 /*
 var Friends = {
@@ -32,5 +33,13 @@ var Friends = {
     Friends.listOfFriends.has(username);
   }
 };
+
+
+let username = $(event).text();
+    $('.username').click(function(value) {
+      Friends.toggleStatus(value.target);
+      //console.log
+      //Friends.toggleStatus(value);
+    });
 */
 

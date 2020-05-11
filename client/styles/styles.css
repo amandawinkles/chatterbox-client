@@ -89,5 +89,6 @@ form input[type=text] {
 }
 
 .username {
+    color: #53777a;
     cursor: pointer;
 }
