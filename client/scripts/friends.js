@@ -1,36 +1,36 @@
 var Friends = {
-  // listOfFriends: new Set(),
-  toggleStatus: function () {
-    //   if (Friends.listOfFriends.has(username)) {
-    //     Friends.listOfFriends.add(username);
-    //   }
-    // },
-    // friendStatus: function (username) {
-    //   Friends.listOfFriends.has(username);
-    // console.log($('.username'));
-    //   $('.username').click(function () {
-    //     // Friends.toggleStatus(value);
-    //     var clicked = ($(this).text());
-    //     console.log('clicked', clicked);
-    //   });
-    // }
-    $(document).ready(function () {
-      $('.username').click(function (value) {
-        Friends.toggleStatus(value);
-      });
-    });
-    .friend {
-    color: #fff;
-background - color: #0090da;
-cursor: pointer;
-    }
-    .username {
-  cursor: pointer;
-  color: blue;
-}
-};
+  listOfFriends: new Set(),
 
-// $('.username').on('click', function (value) {
-//   Friends.toggleStatus(value);
-// });
+  toggleStatus: function(username) {
+    if (!Friends.listOfFriends.has(username)) {
+      Friends.listOfFriends.add(username);
+    }
+  },
+
+  friendStatus: function(username) {
+    Friends.listOfFriends.has(username);
+  }
+};
+$('.username').click(function(value) {
+  let name = ($(this).text());
+  //console.log
+  Friends.toggleStatus(name);
+});
+
+/*
+var Friends = {
+  listOfFriends: new Set(),
+
+  toggleStatus: function(username) {
+    $('.username').on('click', function(value) {
+      let name = ($(this).text());
+      Friends.toggleStatus(name);
+    });
+  },
+
+  friendStatus: function(username) {
+    Friends.listOfFriends.has(username);
+  }
+};
+*/
 
